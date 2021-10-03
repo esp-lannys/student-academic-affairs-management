@@ -1,0 +1,6 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic:
+      studentCreated: STUDENT_CREATED_TOPIC
+      retentionRequested: RETENTION_REQUESTED_TOPIC

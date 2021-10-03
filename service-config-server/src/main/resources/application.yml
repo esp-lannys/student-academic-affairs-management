@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: native
+---
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations:
+            ${CONFIG_SERVER_PROPERTIES_APPLICATION_PATH},
+            ${CONFIG_SERVER_PROPERTIES_GLOBAL_PATH}
+  config:
+    activate:
+      on-profile: native
+---
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nphoangtu/student-academic-affairs-management/
+          search-paths:
+            - "service-config-properties/{application}/{profile}"
+            - "service-config-properties/global/{profile}"
+  config:
+    activate:
+      on-profile: git
+
+
