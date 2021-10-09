@@ -21,7 +21,7 @@ spring:
       mode: always
       platform: postgres
       username: ${DATABASE_USERNAME}
-      password: ${DATABASE_PASSWORD
+      password: ${DATABASE_PASSWORD}
 eureka:
   client:
     serviceUrl:
