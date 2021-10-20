@@ -3,6 +3,8 @@ spring:
     active: native
 ---
 spring:
+  application:
+    name: service-config-server
   cloud:
     config:
       server:
@@ -13,6 +15,13 @@ spring:
   config:
     activate:
       on-profile: native
+server:
+  port: 9091
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
 ---
 spring:
   cloud:
