@@ -4,3 +4,4 @@ spring:
     topic:
       studentCreated: STUDENT_CREATED_TOPIC
       retentionRequested: RETENTION_REQUESTED_TOPIC
+      retentionSucceeded: RETENTION_SUCCEEDED_TOPIC

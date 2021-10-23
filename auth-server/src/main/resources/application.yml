@@ -6,7 +6,7 @@ eureka:
 #secret key - should be encrypted
 jwt:
   secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
-#2 minutes validity
+  # expired in 2 days
   expiration: 172800
 #ignore null fields in json
 spring:

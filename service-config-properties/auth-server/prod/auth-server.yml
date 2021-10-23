@@ -16,7 +16,10 @@ spring:
     default-property-inclusion: NON_NULL
 
 management:
-  health:
-    livenessState.enabled: true
-    readinessState.enabled: true
-  endpoint.health.probes.enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: *
+  endpoint:
+    refresh:
+      enabled: true

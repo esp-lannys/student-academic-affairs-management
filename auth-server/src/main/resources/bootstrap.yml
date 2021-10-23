@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: auth-server
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: auth-server
+server:
+  port: 9090
