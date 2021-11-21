@@ -1,12 +1,9 @@
-#spring:
-#  application:
-#    name: service-retention
-#
-#server:
-#  port: 8084
-#
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: service-retention
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: service-config-server
 

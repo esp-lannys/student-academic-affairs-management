@@ -29,4 +29,6 @@ security:
     enabled: false
 
 server:
+  error:
+    include-stacktrace: on-param
   port: 8081
