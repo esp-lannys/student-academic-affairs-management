@@ -3,8 +3,9 @@ spring:
     active: native
 ---
 spring:
-  application:
-    name: service-config-server
+  config:
+    activate:
+      on-profile: native
   cloud:
     config:
       server:
@@ -12,27 +13,17 @@ spring:
           search-locations:
             ${CONFIG_SERVER_PROPERTIES_APPLICATION_PATH},
             ${CONFIG_SERVER_PROPERTIES_GLOBAL_PATH}
-  config:
-    activate:
-      on-profile: native
-server:
-  port: 9091
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
 
 management:
   endpoints:
     web:
       exposure:
-        include: *
-  endpoint:
-    refresh:
-      enabled: true
+        include: "*"
 ---
 spring:
+  config:
+    activate:
+      on-profile: git
   cloud:
     config:
       server:
@@ -41,8 +32,6 @@ spring:
           search-paths:
             - "service-config-properties/{application}/{profile}"
             - "service-config-properties/global/{profile}"
-  config:
-    activate:
-      on-profile: git
+
 
 

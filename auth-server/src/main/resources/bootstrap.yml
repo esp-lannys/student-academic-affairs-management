@@ -5,6 +5,10 @@ spring:
     config:
       discovery:
         enabled: true
-        service-id: auth-server
-server:
-  port: 9090
+        service-id: service-config-server
+
+#secret key - should be encrypted
+jwt:
+  secret: ${JWT_KEY}
+  #2 minutes validity
+  expiration: 172800
