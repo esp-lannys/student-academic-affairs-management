@@ -9,7 +9,7 @@ spring:
 server:
   error:
     include-stacktrace: on_param
-  port: 9092
+  port: 9093
 #secret key - should be encrypted
 jwt:
   secret: ${JWT_KEY}
