@@ -7,8 +7,11 @@ spring:
       ribbon:
         enabled: false
 
+#secret key - should be encrypted
 jwt:
-  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
+  secret: ${JWT_KEY}
+  #2 minutes validity
+  expiration: 172800
 
 management:
   endpoint.gateway.enabled: true
@@ -23,4 +26,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 server:
-  port: 9090
+  port: 9092
