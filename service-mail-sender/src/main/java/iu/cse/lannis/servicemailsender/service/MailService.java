@@ -24,7 +24,7 @@ public class MailService {
             Mail newMail = new Mail();
             newMail.setSentTo(studentDto.getEmail());
             newMail.setSubject("TEST MAIL SENT FROM HEAVEN");
-            newMail.setText("HAHAHA MINH GUI MAIL DUOC ROI NE CAC BAN");
+            newMail.setText("HAHAHA MINH GUI MAIL DUOC ROI NE CAC BAN, XIN CHAO: " + studentDto.getStudentName() + " DA DEN VOI CHUNG TOI");
 
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(newMail.getSentTo());

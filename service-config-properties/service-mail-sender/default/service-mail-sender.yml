@@ -1,5 +1,11 @@
+server:
+  error:
+    include-stacktrace: on-param
+  port: 8082
+
 spring:
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
       group-id: service_mail_consumer
   datasource:
@@ -23,6 +29,3 @@ spring:
     properties.mail.smtp:
       auth: true
       starttls.enable: true
-security:
-  basic:
-    enabled: false

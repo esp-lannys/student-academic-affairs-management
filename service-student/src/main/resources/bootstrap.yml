@@ -6,3 +6,4 @@ spring:
       discovery:
         enabled: true
         service-id: service-config-server
+      name: service-student,global

@@ -1,6 +1,6 @@
-create table if not exists service_mail.mail (
+create table if not exists service_mail.mails (
     id bigserial not null primary key ,
-    "to" text not null ,
+    sentTo text not null ,
     subject text not null ,
     text text not null
-)
+);
