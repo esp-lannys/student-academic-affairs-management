@@ -20,6 +20,10 @@ public class GatewayConfig {
                         .filters(f -> f.filter(authFilter))
                         .uri("lb://service-user")
                 )
+                .route("service-retention", r -> r.path("/retentions/**")
+                        .filters(f -> f.filter(authFilter))
+                        .uri("lb://service-retention")
+                )
                 .build();
     }
 }

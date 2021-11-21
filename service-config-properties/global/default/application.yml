@@ -5,3 +5,5 @@ spring:
       studentCreated: STUDENT_CREATED_TOPIC
       retentionRequested: RETENTION_REQUESTED_TOPIC
       retentionSucceeded: RETENTION_SUCCEEDED_TOPIC
+      semesterCourseHypothesis: SEMESTER_COURSE_HYPOTHESIS
+      courseRegistrationAvailable: COURSE_REGISTRATION_AVAILABLE

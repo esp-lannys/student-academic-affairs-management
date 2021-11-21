@@ -2,12 +2,13 @@ package iu.cse.lannis.servicestudent.controller;
 
 import iu.cse.lannis.servicestudent.dto.StudentDto;
 import iu.cse.lannis.servicestudent.entity.Student;
-import iu.cse.lannis.servicestudent.kafka.producer.Sender;
+// import iu.cse.lannis.servicestudent.kafka.producer.Sender;
 import iu.cse.lannis.servicestudent.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RefreshScope
 @CrossOrigin("*")
 public class StudentController {
 
