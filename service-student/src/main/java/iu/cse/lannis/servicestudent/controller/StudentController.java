@@ -2,7 +2,6 @@ package iu.cse.lannis.servicestudent.controller;
 
 import iu.cse.lannis.servicestudent.dto.StudentDto;
 import iu.cse.lannis.servicestudent.entity.Student;
-// import iu.cse.lannis.servicestudent.kafka.producer.Sender;
 import iu.cse.lannis.servicestudent.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -31,9 +30,9 @@ public class StudentController {
         return ResponseEntity.ok(this.studentService.getStudentById(id));
     }
 
-    @GetMapping("/students/{email}")
-    public ResponseEntity<Student> getStudentByEmail(@PathVariable("email") String email) {
-        return ResponseEntity.ok(this.studentService.getStudentByEmail(email));
+    @GetMapping("/students/student")
+    public ResponseEntity<Student> getStudentByUsername(@RequestParam(value = "username") String username) {
+        return ResponseEntity.ok(this.studentService.getStudentByUsername(username));
     }
 
     @GetMapping("/students")

@@ -3,6 +3,7 @@ package iu.cse.lannis.authserver.controller;
 import iu.cse.lannis.authserver.dto.UserSignInDto;
 import iu.cse.lannis.authserver.dto.UserSignUpDto;
 import iu.cse.lannis.authserver.entities.AuthResponse;
+import iu.cse.lannis.authserver.entities.AuthSignInRequest;
 import iu.cse.lannis.authserver.entities.AuthSignUpRequest;
 import iu.cse.lannis.authserver.services.AuthService;
 import iu.cse.lannis.authserver.util.JwtUtil;
@@ -18,20 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
-    private final JwtUtil jwtUtil;
     private final AuthService authService;
 
     @Autowired
-    public AuthController(AuthService authService, JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<String> login(@RequestBody UserSignInDto dto) {
-        String token = "";
-
-        return new ResponseEntity<String>(token, HttpStatus.OK);
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthSignInRequest authSignInRequest) {
+        return ResponseEntity.ok(authService.login(authSignInRequest));
     }
 
     @PostMapping("/auth/register")

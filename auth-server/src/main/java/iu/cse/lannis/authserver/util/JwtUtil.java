@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.jsonwebtoken.security.Keys;
+import iu.cse.lannis.authserver.dto.StudentDto;
 import iu.cse.lannis.authserver.dto.UserSignInDto;
 import iu.cse.lannis.authserver.dto.UserSignUpDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +52,14 @@ public class JwtUtil {
     }
 
     public String generateTokenSignUp(UserSignUpDto dto, String type) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", dto.getId());
+        claims.put("email", dto.getEmail());
+        claims.put("username", dto.getUsername());
+        return doGenerateToken(claims, dto.getEmail(), type);
+    }
+
+    public String generateTokenSignIn(StudentDto dto, String type) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", dto.getId());
         claims.put("email", dto.getEmail());

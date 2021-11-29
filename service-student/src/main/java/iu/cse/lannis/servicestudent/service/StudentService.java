@@ -60,4 +60,10 @@ public class StudentService {
 
         return createdStudent;
     }
+
+    public Student getStudentByUsername (String username) {
+        return this.studentRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new ServiceStudentException("Student Not found", HttpStatus.NOT_FOUND));
+    }
 }

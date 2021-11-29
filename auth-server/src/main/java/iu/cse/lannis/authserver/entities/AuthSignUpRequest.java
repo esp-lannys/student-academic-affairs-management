@@ -11,5 +11,4 @@ public class AuthSignUpRequest {
     private String email;
     private String studentName;
     private String password;
-    private String role;
 }

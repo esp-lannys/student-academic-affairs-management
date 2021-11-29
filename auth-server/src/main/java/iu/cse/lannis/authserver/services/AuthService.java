@@ -1,7 +1,10 @@
 package iu.cse.lannis.authserver.services;
 
+import iu.cse.lannis.authserver.dto.StudentDto;
+import iu.cse.lannis.authserver.dto.UserSignInDto;
 import iu.cse.lannis.authserver.dto.UserSignUpDto;
 import iu.cse.lannis.authserver.entities.AuthResponse;
+import iu.cse.lannis.authserver.entities.AuthSignInRequest;
 import iu.cse.lannis.authserver.entities.AuthSignUpRequest;
 import iu.cse.lannis.authserver.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +29,20 @@ public class AuthService {
 
         authSignUpRequest.setPassword(BCrypt.hashpw(authSignUpRequest.getPassword(), BCrypt.gensalt()));
 
-        UserSignUpDto dto = restTemplate.postForObject("http://service-student/students", authSignUpRequest, UserSignUpDto.class);
+        var dto = restTemplate.postForObject("http://service-student/students", authSignUpRequest, UserSignUpDto.class);
         Assert.notNull(dto, "Failed to register new student");
         String accessToken = jwtUtil.generateTokenSignUp(dto, "ACCESS");
         String refreshToken = jwtUtil.generateTokenSignUp(dto, "REFRESH");
 
+        return new AuthResponse(accessToken, refreshToken);
+    }
+
+    public AuthResponse login(AuthSignInRequest authSignInRequest) {
+        StudentDto dto = restTemplate.getForObject("http://service-student/students/student?username=" + authSignInRequest.getUsername(), StudentDto.class);
+        Assert.notNull(dto, "Username or password is not correct");
+        Assert.isTrue(BCrypt.checkpw(authSignInRequest.getPassword(), dto.getPassword()), "Username or password is not correct");
+        String accessToken = jwtUtil.generateTokenSignIn(dto, "ACCESS");
+        String refreshToken = jwtUtil.generateTokenSignIn(dto, "REFRESH");
         return new AuthResponse(accessToken, refreshToken);
     }
 }
