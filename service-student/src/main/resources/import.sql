@@ -1,0 +1,1 @@
+insert into service_student.students (student_name, username, password, email) values ('Lannis', 'lannis', '$2a$10$xzYpKFy48SanpwyfxPp/p.lqQDHaeCBgZjm/xgpc74CGzIBUftffy', 'nphoangtu@gmail.com');

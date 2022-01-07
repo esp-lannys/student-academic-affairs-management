@@ -27,7 +27,7 @@ public class Course {
     private String name;
 
     @Column(name = "instructor_name", columnDefinition = "varchar(255) not null")
-    private Long instructor_name;
+    private Long instructorName;
 
     @Column(name = "semester", columnDefinition = "int")
     private int semester;

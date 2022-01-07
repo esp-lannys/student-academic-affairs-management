@@ -1,25 +1,27 @@
-management:
-  health:
-    livenessState.enabled: true
-    readinessState.enabled: true
-  endpoint.health.probes.enabled: true
-
 spring:
   datasource:
+    platform: postgres
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/thesis
-    username: postgres
-    password: 1
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
     show-sql: true
     hibernate:
       ddl-auto: create-drop
   sql:
     init:
       mode: always
-      platform: postgres
-      username: ${DATABASE_USERNAME}
-      password: ${DATABASE_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 eureka:
   client:
     serviceUrl:
