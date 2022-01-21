@@ -1,9 +1,12 @@
 spring:
+  zipkin:
+    base-url: http://localhost:9411/
   kafka:
     bootstrap-servers: localhost:9092
     topic:
       studentCreated: STUDENT_CREATED_TOPIC
       retentionRequested: RETENTION_REQUESTED_TOPIC
+      retentionStudentVerified: RETENTION_STUDENT_VERIFIED_TOPIC
       retentionSucceeded: RETENTION_SUCCEEDED_TOPIC
-      semesterCourseHypothesis: SEMESTER_COURSE_HYPOTHESIS
-      courseRegistrationAvailable: COURSE_REGISTRATION_AVAILABLE
+      semesterCourseHypothesis: SEMESTER_COURSE_HYPOTHESIS_TOPIC
+      courseRegistrationAvailable: COURSE_REGISTRATION_AVAILABLE_TOPIC

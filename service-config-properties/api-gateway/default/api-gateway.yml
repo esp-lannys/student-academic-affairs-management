@@ -1,8 +1,13 @@
 spring:
   cloud:
     gateway:
+      loadbalancer:
+        use404: true
       metrics:
         enabled: true
+      discovery:
+        locator:
+          enabled: true
     loadbalancer:
       ribbon:
         enabled: false

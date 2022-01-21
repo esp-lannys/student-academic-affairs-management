@@ -1,6 +1,6 @@
 package iu.cse.lannis.servicestudent.controller;
 
-import iu.cse.lannis.servicestudent.dto.StudentDto;
+import iu.cse.lannis.servicestudent.dto.CreateStudentDto;
 import iu.cse.lannis.servicestudent.entity.Student;
 import iu.cse.lannis.servicestudent.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +41,9 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public ResponseEntity<Student> registerStudent(@RequestBody StudentDto studentDto) {
-        LOGGER.info("sending payload='{}'", studentDto);
-        Student createdStudent = studentService.registerStudent(studentDto);
+    public ResponseEntity<Student> registerStudent(@RequestBody CreateStudentDto createStudentDto) {
+        LOGGER.info("sending payload='{}'", createStudentDto);
+        Student createdStudent = this.studentService.registerStudent(createStudentDto);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 }

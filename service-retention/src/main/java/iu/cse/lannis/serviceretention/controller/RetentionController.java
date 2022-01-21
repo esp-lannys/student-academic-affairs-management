@@ -1,6 +1,6 @@
 package iu.cse.lannis.serviceretention.controller;
 
-import iu.cse.lannis.serviceretention.dto.StudentRetentionDto;
+import iu.cse.lannis.serviceretention.dto.RetentionRequestDto;
 import iu.cse.lannis.serviceretention.entity.Retention;
 import iu.cse.lannis.serviceretention.service.RetentionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import java.util.List;
 @RefreshScope
 @RestController
 @RequestMapping("retentions")
+@CrossOrigin("*")
 public class RetentionController {
     private final RetentionService retentionService;
 
@@ -22,7 +23,7 @@ public class RetentionController {
         this.retentionService = retentionService;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Retention> getAllRetentions() {
         return this.retentionService.getAllRetentions();
     }
@@ -35,7 +36,7 @@ public class RetentionController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Retention> createRetention(@RequestBody StudentRetentionDto studentRetentionDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.retentionService.createRetention(studentRetentionDto));
+    public ResponseEntity<Retention> createRetention(@RequestBody RetentionRequestDto retentionRequestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.retentionService.createRetention(retentionRequestDto));
     }
 }

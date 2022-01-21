@@ -1,12 +1,13 @@
 package iu.cse.lannis.authserver.util;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import iu.cse.lannis.authserver.dto.StudentDto;
-import iu.cse.lannis.authserver.dto.UserSignInDto;
 import iu.cse.lannis.authserver.dto.UserSignUpDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class JwtUtil {
 
     @PostConstruct
     public void init() {
-        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
     public Claims getClaims(final String token) {
@@ -56,7 +57,7 @@ public class JwtUtil {
         claims.put("id", dto.getId());
         claims.put("email", dto.getEmail());
         claims.put("username", dto.getUsername());
-        return doGenerateToken(claims, dto.getEmail(), type);
+        return doGenerateToken(claims, "Sign Up", type);
     }
 
     public String generateTokenSignIn(StudentDto dto, String type) {
@@ -64,7 +65,7 @@ public class JwtUtil {
         claims.put("id", dto.getId());
         claims.put("email", dto.getEmail());
         claims.put("username", dto.getUsername());
-        return doGenerateToken(claims, dto.getEmail(), type);
+        return doGenerateToken(claims, "Sign in", type);
     }
 
     private String doGenerateToken(Map<String, Object> claims, String username, String type) {
@@ -75,14 +76,14 @@ public class JwtUtil {
             expirationTimeLong = Long.parseLong(expirationTime) * 1000 * 5;
         }
         final Date createdDate = new Date();
-        final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong);
+        final Date expirationDate = new Date(createdDate.getTime() + 864000000);
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(createdDate)
                 .setExpiration(expirationDate)
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 

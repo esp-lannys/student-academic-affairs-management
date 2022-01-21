@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: service-retetion
+  #  datasource:
+  #    driver-class-name: org.postgresql.Driver
+  #    platform: postgres
+  #    url: ${DATABASE_URL}
+  #    username: ${DATABASE_USERNAME}
+  #    password: ${DATABASE_PASSWORD}
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  sql:
+    init:
+      mode: always
+      username: ${DATABASE_USERNAME}
+      password: ${DATABASE_PASSWORD}
+      encoding: UTF-8
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  error:
+    include-stacktrace: on_param
+  port: 8084
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

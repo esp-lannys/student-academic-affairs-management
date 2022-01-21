@@ -18,8 +18,15 @@ public class Receiver {
     @Autowired
     private MailService emailService;
 
-    @KafkaListener(topics = "STUDENT_CREATED_TOPIC", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "${spring.kafka.topic.studentCreated}", containerFactory = "kafkaListenerContainerFactory")
     public void receive(StudentDto payload) {
+        LOGGER.info("received payload='{}'", payload);
+        emailService.sendSimpleMessage(payload);
+        latch.countDown();
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.retentionSucceeded}", containerFactory = "kafkaListenerContainerFactory")
+    public void receiveRetentionSucceededMessage(StudentDto payload) {
         LOGGER.info("received payload='{}'", payload);
         emailService.sendSimpleMessage(payload);
         latch.countDown();

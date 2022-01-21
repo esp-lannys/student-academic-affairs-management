@@ -3,3 +3,8 @@ server:
 spring:
   application:
     name: service-config-server
+eureka:
+  client:
+    region: ap-southeast-1
+    service-url:
+      defaultZone: http://localhost:8761/eureka

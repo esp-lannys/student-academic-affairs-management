@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder(toBuilder = true)
 public class StudentDto {
     private Long id;
-    private String username;
     private String studentName;
-    private String email;
+    private String username;
     private String password;
+    private String email;
 }

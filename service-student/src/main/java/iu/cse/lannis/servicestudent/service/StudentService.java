@@ -1,6 +1,6 @@
 package iu.cse.lannis.servicestudent.service;
 
-import iu.cse.lannis.servicestudent.dto.StudentDto;
+import iu.cse.lannis.servicestudent.dto.CreateStudentDto;
 import iu.cse.lannis.servicestudent.entity.Student;
 import iu.cse.lannis.servicestudent.exception.ServiceStudentException;
 import iu.cse.lannis.servicestudent.kafka.producer.Sender;
@@ -8,6 +8,7 @@ import iu.cse.lannis.servicestudent.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -47,18 +48,22 @@ public class StudentService {
         return student.get();
     }
 
-    public Student registerStudent(StudentDto studentDto) {
+    public Student registerStudent(CreateStudentDto createStudentDto) {
 
         Student createdStudent = new Student();
-        createdStudent.setStudentName(studentDto.getStudentName());
-        createdStudent.setEmail(studentDto.getEmail());
-        createdStudent.setUsername(studentDto.getUsername());
-        createdStudent.setPassword(studentDto.getPassword());
-        studentRepository.save(createdStudent);
-        // send kafka message
-        sender.send(STUDENT_CREATED_TOPIC, createdStudent);
-
-        return createdStudent;
+        createdStudent.setStudentName(createStudentDto.getStudentName());
+        createdStudent.setEmail(createStudentDto.getEmail());
+        createdStudent.setUsername(createStudentDto.getUsername());
+        createdStudent.setPassword(createStudentDto.getPassword());
+        this.studentRepository.save(createdStudent);
+        boolean isStudentSaved = this.studentRepository.exists(Example.of(createdStudent));
+        if (isStudentSaved) {
+            // send kafka message
+            sender.send(STUDENT_CREATED_TOPIC, createdStudent);
+            return createdStudent;
+        } else {
+            throw new ServiceStudentException("Cannot create student", HttpStatus.BAD_REQUEST);
+        }
     }
 
     public Student getStudentByUsername (String username) {

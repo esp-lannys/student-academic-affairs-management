@@ -27,11 +27,20 @@ public class Retention {
             }
     )
     private Long id;
+
+    @Column(name = "note", columnDefinition = "varchar(255)")
     private String note;
-    @Column(name = "student_id", nullable = false)
+
+    @Column(name = "student_id", nullable = false, columnDefinition = "bigint")
     private Long studentId;
-    @Column(name = "student_name", nullable = false)
+
+    @Column(name = "student_name", nullable = false, columnDefinition = "varchar(255)")
     private String studentName;
+
+    @Column(name = "student_email", nullable = false, columnDefinition = "varchar(255)")
+    private String studentEmail;
+
+    @Column(name = "reason", nullable = false, columnDefinition = "varchar(255)")
     private String reason;
 
     public Retention(String note, Long studentId, String studentName, String reason) {

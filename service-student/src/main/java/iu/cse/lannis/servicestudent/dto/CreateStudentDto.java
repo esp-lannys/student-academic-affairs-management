@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-public class StudentDto {
-
+@Builder(toBuilder = true)
+public class CreateStudentDto {
     private String studentName;
     private String username;
     private String password;
     private String email;
-
 }

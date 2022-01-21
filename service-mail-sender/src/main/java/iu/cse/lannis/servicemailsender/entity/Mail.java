@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 @Builder
 @Entity
 @Table(name = "\"mails\"", schema = "service_mail")
-public class Mail {
+public class Mail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
