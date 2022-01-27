@@ -37,7 +37,7 @@ public class AuthFilter implements GatewayFilter {
                 try {
                     jwtUtil.validateToken(token);
                 } catch (JwtTokenMalformedException | JwtTokenMissingException e) {
-                    // e.printStackTrace();
+                    e.printStackTrace();
                     ServerHttpResponse response = exchange.getResponse();
                     response.setStatusCode(HttpStatus.UNAUTHORIZED);
                     return response.setComplete();

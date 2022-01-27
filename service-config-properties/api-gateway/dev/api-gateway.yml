@@ -15,8 +15,7 @@ server:
 #secret key - should be encrypted
 jwt:
   secret: ${JWT_KEY}
-  #2 minutes validity
-  expiration: 172800
+  expiration: 86400
 
 management:
   endpoint.gateway.enabled: true

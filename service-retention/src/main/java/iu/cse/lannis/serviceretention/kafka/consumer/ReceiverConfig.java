@@ -24,8 +24,6 @@ public class ReceiverConfig {
     @Value("${spring.kafka.consumer.group-id}")
     private String consumerGroupId;
 
-    // mình sẽ phải subscribe sự kiện retention student verified
-
     @Bean
     public ConsumerFactory<String, StudentDto> studentVerificationFactory() {
         JsonDeserializer<StudentDto> customDeserializer =

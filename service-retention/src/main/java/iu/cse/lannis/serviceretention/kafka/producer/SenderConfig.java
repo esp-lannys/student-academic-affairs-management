@@ -20,8 +20,6 @@ public class SenderConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    // 1. Send student verification factory message
-
     @Bean
     public Map<String, Object> producerConfig() {
         Map<String, Object> props = new HashMap<>();
@@ -53,7 +51,7 @@ public class SenderConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, StudentDto> retentionSucceededKafkaTemplate() {
+    public KafkaTemplate<String, StudentDto >retentionSucceededKafkaTemplate() {
         return new KafkaTemplate<>(retentionSucceededFactory());
     }
 

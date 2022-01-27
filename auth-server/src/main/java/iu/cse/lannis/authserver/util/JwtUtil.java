@@ -4,17 +4,15 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import io.jsonwebtoken.Header;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import iu.cse.lannis.authserver.dto.StudentDto;
 import iu.cse.lannis.authserver.dto.UserSignUpDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-
 import javax.annotation.PostConstruct;
 
 @Component
@@ -56,19 +54,17 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", dto.getId());
         claims.put("email", dto.getEmail());
-        claims.put("username", dto.getUsername());
-        return doGenerateToken(claims, "Sign Up", type);
+        return doGenerateToken(claims, dto.getUsername(), type);
     }
 
     public String generateTokenSignIn(StudentDto dto, String type) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", dto.getId());
         claims.put("email", dto.getEmail());
-        claims.put("username", dto.getUsername());
-        return doGenerateToken(claims, "Sign in", type);
+        return doGenerateToken(claims, dto.getUsername(), type);
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String username, String type) {
+    private String doGenerateToken(Map<String, Object> claims, String subject, String type) {
         long expirationTimeLong;
         if ("ACCESS".equals(type)) {
             expirationTimeLong = Long.parseLong(expirationTime) * 1000;
@@ -76,19 +72,23 @@ public class JwtUtil {
             expirationTimeLong = Long.parseLong(expirationTime) * 1000 * 5;
         }
         final Date createdDate = new Date();
-        final Date expirationDate = new Date(createdDate.getTime() + 864000000);
+        final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong);
 
+        Map<String, Object> headerProps = new HashMap<>();
+        headerProps.put("typ", Header.JWT_TYPE);
+        System.out.println(this.key);
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
+                .setSubject(subject)
                 .setIssuedAt(createdDate)
                 .setExpiration(expirationDate)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .setHeader(headerProps)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public Boolean validateToken(String token) {
-        return !isTokenExpired(token);
+        return isTokenExpired(token);
     }
 
 }

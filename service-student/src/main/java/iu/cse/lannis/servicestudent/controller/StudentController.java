@@ -42,7 +42,6 @@ public class StudentController {
 
     @PostMapping("/students")
     public ResponseEntity<Student> registerStudent(@RequestBody CreateStudentDto createStudentDto) {
-        LOGGER.info("sending payload='{}'", createStudentDto);
         Student createdStudent = this.studentService.registerStudent(createStudentDto);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }

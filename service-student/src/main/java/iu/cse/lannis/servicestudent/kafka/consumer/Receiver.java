@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,7 +20,7 @@ public class Receiver {
 
     private final CountDownLatch latch = new CountDownLatch(1);
 
-    @Value("${spring.kafka.topic.studentCreated}")
+    @Value("${spring.kafka.topic.retentionStudentVerified}")
     private String RETENTION_STUDENT_VERIFIED_TOPIC;
 
     @Autowired
@@ -27,11 +30,11 @@ public class Receiver {
     private Sender sender;
 
     @KafkaListener(topics = "${spring.kafka.topic.retentionRequested}", containerFactory = "kafkaListenerContainerFactory")
-    public void receive(VerifyStudentForRetention payload) {
+    public void receive(@Header(name = KafkaHeaders.RECEIVED_MESSAGE_KEY) String uuid, @Payload VerifyStudentForRetention payload) {
         try {
+            LOGGER.info("Message received => {} uuid => {}", payload, uuid);
             var student = this.studentService.getStudentByEmail(payload.getEmail());
-            this.sender.send(RETENTION_STUDENT_VERIFIED_TOPIC, student);
-            LOGGER.info("received payload='{}'", student);
+            this.sender.sendWithId(RETENTION_STUDENT_VERIFIED_TOPIC, uuid, student);
             latch.countDown();
         } catch (ServiceStudentException exception) {
             LOGGER.error(exception.getMessage());
