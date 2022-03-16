@@ -18,6 +18,8 @@
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 		<java-mail.version>1.4.7</java-mail.version>
 		<jackson-core.version>2.12.4</jackson-core.version>
+		<spring.kafka.version>2.7.10</spring.kafka.version>
+		<kafka.clients.version>2.8.0</kafka.clients.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -29,12 +31,22 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
+			<version>${spring.kafka.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>${kafka.clients.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -72,6 +84,7 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
+			<version>${spring.kafka.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>

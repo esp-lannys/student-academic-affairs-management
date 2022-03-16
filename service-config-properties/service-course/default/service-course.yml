@@ -1,0 +1,33 @@
+spring:
+  kafka:
+    consumer:
+      group-id: service-course
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  sql:
+    init:
+      mode: always
+      platform: postgres
+info:
+  app:
+    name: service-course
+    description: Course Service Application
+    version: 0.0.1
+    author: Lannys Nguyen
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 8085

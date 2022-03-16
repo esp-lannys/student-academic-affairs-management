@@ -22,3 +22,10 @@ management:
 jwt:
   secret: ${JWT_KEY}
   expiration: 86400
+
+info:
+  app:
+    name: auth-server
+    description: Authorization Server Application
+    version: 0.0.1
+    author: Lannys Nguyen

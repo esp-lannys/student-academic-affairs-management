@@ -17,6 +17,8 @@
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.5</spring-cloud.version>
 		<spring-cloud-services.version>1.5.0.RELEASE</spring-cloud-services.version>
+		<spring.kafka.version>2.7.10</spring.kafka.version>
+		<kafka.clients.version>2.8.0</kafka.clients.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,6 +44,12 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
+			<version>${spring.kafka.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>${kafka.clients.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

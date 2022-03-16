@@ -42,8 +42,7 @@ public class Sender {
         });
     }
 
-    public void sendRetentionSuccessMessage(String topic, StudentDto studentDto) {
-        String uuid = UUID.randomUUID().toString();
+    public void sendRetentionSuccessMessage(String topic, String uuid,StudentDto studentDto) {
         ListenableFuture<SendResult<String, StudentDto>> future =
                 this.retentionSucceededKafkaTemplate.send(new ProducerRecord<>(topic, uuid, studentDto));
         future.addCallback(new ListenableFutureCallback<>() {

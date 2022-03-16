@@ -29,3 +29,10 @@ spring:
     properties.mail.smtp:
       auth: true
       starttls.enable: true
+
+info:
+  app:
+    name: service-mail-sender
+    description: Mail Sender Application
+    version: 0.0.1
+    author: Lannys Nguyen

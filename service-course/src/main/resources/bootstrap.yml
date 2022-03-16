@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: service-course
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: service-config-server
+      name: service-course,global
+
+
+springdoc:
+  packages-to-scan: iu.cse.lannis.servicecourse

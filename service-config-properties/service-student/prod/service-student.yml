@@ -3,7 +3,6 @@ spring:
     consumer:
       group-id: service_student
   datasource:
-    platform: postgres
     driver-class-name: org.postgresql.Driver
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
@@ -17,23 +16,27 @@ spring:
       ddl-auto: create-drop
   sql:
     init:
+      platform: postgres
       mode: always
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-security:
-  basic:
-    enabled: false
-
 server:
   error:
     include-stacktrace: on-param
   port: 8081
+
+info:
+  app:
+    name: service-student
+    description: Student Service Application
+    version: 0.0.1
+    author: Lannys Nguyen
+
+

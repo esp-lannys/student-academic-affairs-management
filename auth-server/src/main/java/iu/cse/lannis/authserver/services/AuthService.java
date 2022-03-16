@@ -38,7 +38,7 @@ public class AuthService {
     }
 
     public AuthResponse login(AuthSignInRequest authSignInRequest) {
-        StudentDto dto = restTemplate.getForObject("http://service-student/students/student?username=" + authSignInRequest.getUsername(), StudentDto.class);
+        var dto = restTemplate.getForObject("http://service-student/students/search?username=" + authSignInRequest.getUsername(), StudentDto.class);
         Assert.notNull(dto, "Username or password is not correct");
         Assert.isTrue(BCrypt.checkpw(authSignInRequest.getPassword(), dto.getPassword()), "Username or password is not correct");
         String accessToken = jwtUtil.generateTokenSignIn(dto, "ACCESS");

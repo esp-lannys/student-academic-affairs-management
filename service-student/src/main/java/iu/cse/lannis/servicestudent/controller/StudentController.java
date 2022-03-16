@@ -30,7 +30,7 @@ public class StudentController {
         return ResponseEntity.ok(this.studentService.getStudentById(id));
     }
 
-    @GetMapping("/students/student")
+    @GetMapping("/students/search")
     public ResponseEntity<Student> getStudentByUsername(@RequestParam(value = "username") String username) {
         return ResponseEntity.ok(this.studentService.getStudentByUsername(username));
     }

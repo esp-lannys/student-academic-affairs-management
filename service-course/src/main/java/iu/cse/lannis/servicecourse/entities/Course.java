@@ -27,9 +27,11 @@ public class Course {
     private String name;
 
     @Column(name = "instructor_name", columnDefinition = "varchar(255) not null")
-    private Long instructorName;
+    @NotEmpty(message = "Instructor Name should not be empty")
+    private String instructorName;
 
     @Column(name = "semester", columnDefinition = "int")
+    @NotEmpty(message = "Semester should not be empty")
     private int semester;
 
     @Column(name = "department", columnDefinition = "varchar(255) not null")

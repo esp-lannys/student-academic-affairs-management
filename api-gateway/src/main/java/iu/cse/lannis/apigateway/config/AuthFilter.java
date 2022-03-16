@@ -43,7 +43,6 @@ public class AuthFilter implements GatewayFilter {
                     return response.setComplete();
                 }
                 Claims claims = jwtUtil.getClaims(token);
-                System.out.println(claims);
                 exchange.getRequest().mutate().header("id", String.valueOf(claims.get("id"))).build();
             }
         }
