@@ -1,11 +1,11 @@
 spring:
   profiles:
-    active: local
+    active: native
 ---
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: native
   cloud:
     config:
       server:
