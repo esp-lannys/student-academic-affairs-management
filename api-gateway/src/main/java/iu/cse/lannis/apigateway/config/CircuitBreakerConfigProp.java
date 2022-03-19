@@ -13,7 +13,7 @@ import java.time.Duration;
 @Configuration
 public class CircuitBreakerConfigProp {
 
-    private static final Duration TIMEOUT = Duration.ofSeconds(8);
+    private static final Duration TIMEOUT = Duration.ofSeconds(15);
 
     @Bean
     public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
